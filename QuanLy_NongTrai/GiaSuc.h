@@ -29,6 +29,12 @@ public:
 		cout << "\nNhap Vao Tuoi Gia Suc:";
 		cin >> this->Tuoi;
 	}
+	string getMaSo() {
+		return this->MaSo;
+	}
+	int getTuoi() {
+		return this->Tuoi;
+	}
 	virtual void xuat() {
 		cout << "\nMa Gia Suc :"<< this->MaSo;
 		cout << "\nCan Nang Gia Suc:" << this->CanNang;

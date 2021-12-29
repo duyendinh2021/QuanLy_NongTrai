@@ -11,12 +11,12 @@ public:
 	NongTrai() {
 		this->Ten = "";
 		this->SoLuong = 0;
-		this->dsGiaSuc = NULL;
+		this->dsGiaSuc = new GiaSuc * [this->SoLuong];
 	}
 	NongTrai(string ten, int soluong) {
 		this->Ten = ten;
 		this->SoLuong = soluong;
-		this->dsGiaSuc = new GiaSuc * [this->SoLuong];
+		/*this->dsGiaSuc = new GiaSuc * [this->SoLuong];*/
 	}
 	~NongTrai(){}
 	void nhap() {
@@ -62,6 +62,14 @@ public:
 		}
 		return allSuaBo;
 	}
+	float tinhTongLuongSua() {
+		float allSua = 0;
+		for (int i = 0; i < this->SoLuong; i++)
+		{
+			allSua = allSua + dsGiaSuc[i]->tinhLuongSua();
+		}
+		return allSua;
+	}
 	float tinhTongLuongSuade() {
 		float allSuaDe = 0;
 		for (int i = 0; i < this->SoLuong; i++) {
@@ -70,6 +78,103 @@ public:
 				allSuaDe = allSuaDe + dsGiaSuc[i]->tinhLuongSua();
 		}
 		return allSuaDe;
+	}
+	bool timTheoMS(GiaSuc*& gs) {
+		string temp;
+		cout << "\nNhap vo ma so Gia Suc Muon tim:";
+		cin.ignore(1);
+		getline(cin, temp);
+		for (int i = 0; i < this->SoLuong; i++)
+		{
+			if (temp.compare(dsGiaSuc[i]->getMaSo()) == 0) {
+				gs = dsGiaSuc[i];
+				return true;
+			}
+		}
+		return false;
+	}
+	/*NongTrai timMaSoGiaSuc() {
+		NongTrai kq;
+		string maSoCanTim;
+		cout << "\nNhap vao ma so Gia Suc Can tim:";
+		cin.ignore(1);
+		getline(cin, maSoCanTim);
+		for (int i = 0; i < this->SoLuong; i++)
+		{
+			if (maSoCanTim.compare(dsGiaSuc[i]->getMaSo()) == 0)
+			{
+				kq.dsGiaSuc[kq.SoLuong++] = this->dsGiaSuc[i];
+			}
+		}
+		return kq;
+	}*/
+	NongTrai timTheoTuoi() {
+		NongTrai kq;
+		int temp = 0;
+		cout << "\nNhap vao so tuoi muon:";
+		int temTuoi;
+		cin.ignore(1);
+		cin >> temTuoi;
+		for (int i = 0; i < this->SoLuong; i++)
+		{
+			if (this->dsGiaSuc[i]->getTuoi() == temTuoi) {
+				kq.dsGiaSuc[temp++] = this->dsGiaSuc[i];
+			}
+		}
+		kq.SoLuong = temp;
+		return kq;
+	}
+	float timLuongSuaMax() {
+		float LuongSuaMax = 0;
+		for (int i = 0; i < this->SoLuong; i++)
+		{
+			if (dsGiaSuc[i]->tinhLuongSua() > LuongSuaMax) {
+				LuongSuaMax = dsGiaSuc[i]->tinhLuongSua();
+			}
+		}
+		return LuongSuaMax;
+	}
+	NongTrai TimGiaSucCoLuongSuaMax() {
+		NongTrai kq;
+		int temp = 0;
+		float SuaMax = timLuongSuaMax();
+		for ( int i = 0; i <this->SoLuong; i++)
+		{
+			if (this->dsGiaSuc[i]->tinhLuongSua() == SuaMax)
+			{
+				kq.dsGiaSuc[temp++] = this->dsGiaSuc[i];
+			}
+		}
+		kq.SoLuong = temp;
+		return kq;
+	}
+	NongTrai sapXepTheoLuongSua() {
+		NongTrai temp;
+		temp = *this;
+		for (int i = 0; i < temp.SoLuong - 1; i++)
+		{
+			for (int j=  i + 1;j < temp.SoLuong; j++) {
+				if (temp.dsGiaSuc[i]->tinhLuongSua() > temp.dsGiaSuc[j]->tinhLuongSua())
+				{
+					swap(temp.dsGiaSuc[i], temp.dsGiaSuc[j]);
+				}
+			}
+		}
+		return temp;
+	}
+	NongTrai sapXepTheoTuoi() {
+		NongTrai temp;
+		temp = *this;
+		for (int i = 0; i < temp.SoLuong - 1; i++)
+		{
+			for (int j = i + 1; j < temp.SoLuong; j++) {
+				if (temp.dsGiaSuc[i]->getTuoi() > temp.dsGiaSuc[j]->getTuoi())
+				{
+					swap(temp.dsGiaSuc[i], temp.dsGiaSuc[j]);
+				}
+			}
+		}
+		return temp;
 	}
 };
 
