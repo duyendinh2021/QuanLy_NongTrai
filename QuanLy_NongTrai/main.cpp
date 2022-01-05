@@ -31,6 +31,7 @@ int main() {
 	cout << "\nSap xep theo Luong Sua:";
 	sapXepTheoLuongSua.xuat();*/
 	NongTrai SapXepTheoTuoi = nt->sapXepTheoTuoi();
+	cout << "\n";
 	cout << "\nSap Xep theo Tuoi:";
 	SapXepTheoTuoi.xuat();
 	delete nt;

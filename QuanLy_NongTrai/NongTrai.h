@@ -31,15 +31,30 @@ public:
 		for (int i = 0; i < this->SoLuong; i++)
 		{
 			cout << "\nNhap Loai Gia Suc 1:Bo - 2:De\n";
+			do
+			{
 			cin >> loai;
-			if (loai == 1)
+			switch (loai)
 			{
+			case 1:
 				GS = new Bo();
-			}
-			else if (loai == 2)
-			{
+				break;
+			case 2:
 				GS = new De();
+				break;
+			default:
+				cout << "\nChon Loai Gia Suc 1:Bo - 2:De\n";
+				cout << "\nBan chon sai: vui long chon lai 1->2 ok...";
 			}
+			} while (loai != 1 && loai !=2);
+			//if (loai == 1)
+			//{
+			//	GS = new Bo();
+			//}
+			//else if (loai == 2)
+			//{
+			//	GS = new De();
+			//}
 			GS->nhap();
 			this->dsGiaSuc[i] = GS;
 		}
@@ -168,7 +183,7 @@ public:
 		for (int i = 0; i < temp.SoLuong - 1; i++)
 		{
 			for (int j = i + 1; j < temp.SoLuong; j++) {
-				if (temp.dsGiaSuc[i]->getTuoi() > temp.dsGiaSuc[j]->getTuoi())
+				if (temp.dsGiaSuc[i]->getTuoi() < temp.dsGiaSuc[j]->getTuoi())
 				{
 					swap(temp.dsGiaSuc[i], temp.dsGiaSuc[j]);
 				}
